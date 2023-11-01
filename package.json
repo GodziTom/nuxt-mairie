@@ -17,8 +17,10 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "@prisma/client": "^5.5.2",
     "axios": "^1.6.0",
+    "pinia": "^2.1.7",
     "prisma": "^5.5.2"
   }
 }

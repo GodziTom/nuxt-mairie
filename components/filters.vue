@@ -127,13 +127,12 @@
           <ul class="space-y-2 h-60 overflow-auto">
             <li class="flex items-center" v-for="cat in types" :key="cat.id">
               <input
-                id="{{ cat.id }}"
+                id="{{ cat.type_service_local }}"
                 type="checkbox"
                 value="{{
                 cat.type_service_local
                 }}"
-                v-model="selectedTypes"
-                @click="toggleType(cat.type_service_local)"
+                @click="onCheckboxClick(cat.type_service_local)"
                 :checked="selectedTypes.includes(cat.type_service_local)"
                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
@@ -712,7 +711,10 @@
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
-// import axios from "axios";
+import { useFiltersStore } from "~/stores/filters";
+
+const filters = useFiltersStore();
+console.log(filters);
 
 const filtersOpen = ref(false);
 
@@ -744,23 +746,27 @@ const props = defineProps({
 
 const types = props.collectivites.types;
 
-function toggleType(type) {
-  const index = selectedTypes.value.indexOf(type);
-  if (index !== -1) {
-    selectedTypes.value.splice(index, 1);
-  } else {
-    selectedTypes.value.push(type);
-  }
+// function toggleType(type) {
+//   const index = selectedTypes.value.indexOf(type);
+//   if (index !== -1) {
+//     selectedTypes.value.splice(index, 1);
+//   } else {
+//     selectedTypes.value.push(type);
+//   }
+//   console.log(selectedTypes.value);
+// }
+function onCheckboxClick(type) {
+  console.log(type);
+  filters.toggleFilters(type);
 }
-const selectedValues = selectedTypes.value;
 
-watch(selectedTypes, async (newSelectedTypes) => {
-  // Cette fonction sera appelée à chaque fois que selectedTypes change
+// watch(selectedTypes, async (newSelectedTypes) => {
+//   // Cette fonction sera appelée à chaque fois que selectedTypes change
 
-  console.log(newSelectedTypes);
+//   console.log(newSelectedTypes);
 
-  // Vous pouvez faire votre appel API ici
-  // en passant newSelectedTypes dans le query params
-  const response = await fetch("/api/collectivites?types=" + newSelectedTypes);
-});
+//   // Vous pouvez faire votre appel API ici
+//   // en passant newSelectedTypes dans le query params
+//   const response = await fetch("/api/collectivites?types=" + newSelectedTypes);
+// });
 </script>
