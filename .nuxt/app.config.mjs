@@ -1,10 +1,10 @@
 
 import { updateAppConfig } from '#app'
-import { defuFn } from '/Users/tom/DEV/nuxt-prisma-mairie/node_modules/defu/dist/defu.mjs'
+import { defuFn } from '/Users/tom/DEV/nuxt-mairie/node_modules/defu/dist/defu.mjs'
 
 const inlineConfig = {
   "nuxt": {
-    "buildId": "test"
+    "buildId": "014699aa-bb89-4911-a2f8-147fb9e574ac"
   }
 }
 
