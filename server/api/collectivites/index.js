@@ -6,6 +6,13 @@ export default defineEventHandler(async (event) => {
   const collectivites = await prisma.collectivites.findMany({
     take: 30,
   });
-  console.log(collectivites);
-  return collectivites;
+
+  // const types = await prisma.collectivites.findMany({
+  //   distinct: CollectivitesScalarFieldEnum.from(["type_service_local"]),
+  //   select: {
+  //     typeServiceLocal: true,
+  //   },
+  // });
+
+  return { collectivites };
 });

@@ -207,7 +207,7 @@
             </thead>
             <tbody>
               <tr
-                v-for="col in collectivites"
+                v-for="col in collectivites.collectivites"
                 :key="col.id"
                 class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
@@ -1738,6 +1738,4 @@ const {
 } = useLazyFetch(() => "/api/collectivites", {
   key: "collectivites",
 });
-
-console.log(collectivites);
 </script>

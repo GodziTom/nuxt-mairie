@@ -858,8 +858,7 @@ const index = defineEventHandler(async (event) => {
   const collectivites = await prisma.collectivites.findMany({
     take: 30
   });
-  console.log(collectivites);
-  return collectivites;
+  return { collectivites };
 });
 
 const index$1 = /*#__PURE__*/Object.freeze({

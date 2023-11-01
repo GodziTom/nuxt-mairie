@@ -207,7 +207,7 @@ import type collectivites from '~/server/api/collectivites';
               </tr>
             </thead>
             <tbody>
-              <tr
+              <!-- <tr
                 v-for="col in collectivites"
                 :key="col.id"
                 class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -420,7 +420,7 @@ import type collectivites from '~/server/api/collectivites';
                     </button>
                   </div>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -1733,5 +1733,28 @@ import type collectivites from '~/server/api/collectivites';
 </template>
 
 <script setup>
-const collectivitesFilters = [];
+import { ref, onMounted } from "vue";
+// import axios from "axios";
+
+const filtersOpen = ref(false);
+
+const categories = ref([]);
+
+const categoryOpen = ref(false);
+const priceOpen = ref(false);
+
+const selectedCategory = ref(null);
+
+function toggleFilters() {
+  filtersOpen.value = !filtersOpen.value;
+}
+
+function toggleSubFilters(filter) {
+  if (filter === "category") {
+    categoryOpen.value = !categoryOpen.value;
+  }
+  if (filter === "price") {
+    priceOpen.value = !priceOpen.value;
+  }
+}
 </script>

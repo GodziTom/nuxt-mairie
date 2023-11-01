@@ -162,3 +162,55 @@ model users {
   createdAt DateTime @db.DateTime(0)
   updatedAt DateTime @db.DateTime(0)
 }
+
+enum CollectivitesScalarFieldEnum {
+  id
+  nom
+  type_service_local
+  siret
+  siren
+  code_insee_commune
+  code_postal
+  nom_commune
+  pays
+  continent
+  longitude
+  latitude
+  adresse
+  adresse_courriel
+  telephone
+  telecopie
+  site_internet
+  copyright
+  ancien_code_pivot
+  reseau_social
+  texte_reference
+  partenaire
+  itm_identifiant
+  sigle
+  date_modification
+  date_creation
+  partenaire_date_modification
+  mission
+  formulaire_contact
+  version_type
+  version_etat_modification
+  version_source
+  type_organisme
+  type_repertoire
+  plage_ouverture
+  hierarchie
+  categorie
+  sve
+  telephone_accessible
+  application_mobile
+  statut_de_diffusion
+  information_complementaire
+  commentaire_plage_ouverture
+  annuaire
+  tchat
+  createdAt
+  updatedAt
+  is_selected
+  is_sended
+}
