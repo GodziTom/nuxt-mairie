@@ -1,0 +1,1 @@
+export { default } from "file:///Users/tom/DEV/nuxt-prisma-mairie/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
