@@ -205,7 +205,7 @@
                 <th scope="col" class="p-4">Last Update</th>
               </tr>
             </thead>
-            <!-- <tbody>
+            <tbody>
               <tr
                 v-for="col in collectivites.collectivites"
                 :key="col.id"
@@ -420,7 +420,7 @@
                   </div>
                 </td>
               </tr>
-            </tbody> -->
+            </tbody>
           </table>
         </div>
         <nav
@@ -1747,7 +1747,7 @@ const {
   data: collectivites,
   pending,
   error,
-} = await useLazyAsyncData(() => $fetch("/api/collectivites"), {
+} = useLazyFetch(() => "/api/collectivites", {
   key: "collectivites",
 });
 
