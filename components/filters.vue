@@ -207,8 +207,8 @@ import type collectivites from '~/server/api/collectivites';
               </tr>
             </thead>
             <tbody>
-              <!-- <tr
-                v-for="col in collectivites"
+              <tr
+                v-for="col in types"
                 :key="col.id"
                 class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
@@ -420,7 +420,7 @@ import type collectivites from '~/server/api/collectivites';
                     </button>
                   </div>
                 </td>
-              </tr> -->
+              </tr>
             </tbody>
           </table>
         </div>
@@ -1757,4 +1757,15 @@ function toggleSubFilters(filter) {
     priceOpen.value = !priceOpen.value;
   }
 }
+
+//Props
+const props = defineProps({
+  collectivites: {
+    type: Array,
+    default: () => [],
+  },
+});
+
+// obtenir les props dans un console log
+console.log(props);
 </script>

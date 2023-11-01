@@ -126,7 +126,7 @@
               Add product
             </button>
 
-            <Filters />
+            <Filters :collectivites="collectivites" />
             <div class="flex items-center space-x-3 w-full md:w-auto">
               <button
                 id="actionsDropdownButton"
@@ -205,7 +205,7 @@
                 <th scope="col" class="p-4">Last Update</th>
               </tr>
             </thead>
-            <tbody>
+            <!-- <tbody>
               <tr
                 v-for="col in collectivites.collectivites"
                 :key="col.id"
@@ -420,7 +420,7 @@
                   </div>
                 </td>
               </tr>
-            </tbody>
+            </tbody> -->
           </table>
         </div>
         <nav
@@ -1731,11 +1731,25 @@
   </div>
 </template>
 <script setup>
+import { ref, onMounted } from "vue";
+
+import Filters from "@/components/filters.vue";
+// import useData from "@/composables/allColl.js";
+
+// console.log("useData", useData);
+
+// use lazt fetch
+// const collectivites = ref([]);
+// const pending = ref(true);
+// const error = ref(null);
+
 const {
   data: collectivites,
   pending,
-  refresh,
-} = useLazyFetch(() => "/api/collectivites", {
+  error,
+} = await useLazyAsyncData(() => $fetch("/api/collectivites"), {
   key: "collectivites",
 });
+
+console.log("collec", collectivites);
 </script>
