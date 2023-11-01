@@ -1,3 +1,4 @@
+import type collectivites from '~/server/api/collectivites';
 <!-- Start block -->
 <template>
   <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
@@ -1730,14 +1731,7 @@
     </div>
   </div>
 </template>
-<script setup>
-const {
-  data: collectivites,
-  pending,
-  refresh,
-} = useLazyFetch(() => "/api/collectivites", {
-  key: "collectivites",
-});
 
-console.log(collectivites);
+<script setup>
+const collectivitesFilters = [];
 </script>

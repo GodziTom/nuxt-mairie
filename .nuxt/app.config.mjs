@@ -4,7 +4,7 @@ import { defuFn } from '/Users/tom/DEV/nuxt-mairie/node_modules/defu/dist/defu.m
 
 const inlineConfig = {
   "nuxt": {
-    "buildId": "014699aa-bb89-4911-a2f8-147fb9e574ac"
+    "buildId": "test"
   }
 }
 
