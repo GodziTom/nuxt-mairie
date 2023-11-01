@@ -132,6 +132,9 @@
                 value="{{
                 cat.type_service_local
                 }}"
+                v-model="selectedTypes"
+                @click="toggleType(cat.type_service_local)"
+                :checked="selectedTypes.includes(cat.type_service_local)"
                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
               <label
@@ -713,12 +716,10 @@ import { ref, onMounted } from "vue";
 
 const filtersOpen = ref(false);
 
-const categories = ref([]);
-
 const categoryOpen = ref(false);
 const priceOpen = ref(false);
 
-const selectedCategory = ref(null);
+const selectedTypes = ref([]);
 
 function toggleFilters() {
   filtersOpen.value = !filtersOpen.value;
@@ -741,9 +742,25 @@ const props = defineProps({
   },
 });
 
-// obtenir les props dans un console log
-console.log("props", props);
 const types = props.collectivites.types;
-console.log("types", types);
-// console.log("types", types);
+
+function toggleType(type) {
+  const index = selectedTypes.value.indexOf(type);
+  if (index !== -1) {
+    selectedTypes.value.splice(index, 1);
+  } else {
+    selectedTypes.value.push(type);
+  }
+}
+const selectedValues = selectedTypes.value;
+
+watch(selectedTypes, async (newSelectedTypes) => {
+  // Cette fonction sera appelée à chaque fois que selectedTypes change
+
+  console.log(newSelectedTypes);
+
+  // Vous pouvez faire votre appel API ici
+  // en passant newSelectedTypes dans le query params
+  const response = await fetch("/api/collectivites?types=" + newSelectedTypes);
+});
 </script>
