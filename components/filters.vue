@@ -714,7 +714,7 @@ import { ref, onMounted } from "vue";
 import { useFiltersStore } from "~/stores/filters";
 
 const filters = useFiltersStore();
-console.log(filters);
+// console.log(filters);
 
 const filtersOpen = ref(false);
 
@@ -756,9 +756,12 @@ const types = props.collectivites.types;
 //   console.log(selectedTypes.value);
 // }
 function onCheckboxClick(type) {
-  console.log(type);
   filters.toggleFilters(type);
 }
+
+onMounted(() => {
+  filters.fetchData(filters);
+});
 
 // watch(selectedTypes, async (newSelectedTypes) => {
 //   // Cette fonction sera appelée à chaque fois que selectedTypes change

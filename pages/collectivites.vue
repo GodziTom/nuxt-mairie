@@ -1751,5 +1751,12 @@ const {
   key: "collectivites",
 });
 
-console.log("collec", collectivites);
+const filters = useFiltersStore();
+const selectedTypes = filters.selectedTypes;
+
+watch(filters.selectedTypes, () => {
+  filters.fetchData(filters.selectedTypes);
+
+  console.log("page", selectedTypes);
+});
 </script>
