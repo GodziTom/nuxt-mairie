@@ -205,7 +205,7 @@
                 <th scope="col" class="p-4">Last Update</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="collectivites">
               <tr
                 v-for="col in collectivites.collectivites"
                 :key="col.id"
@@ -1734,24 +1734,28 @@
 import { ref, onMounted } from "vue";
 
 import Filters from "@/components/filters.vue";
-const AllColl = ref([]);
+import { useCollectivitesStore } from "~/stores/collectivitesData";
+import { useFiltersStore } from "~/stores/filters";
 
-const {
-  data: collectivites,
-  pending,
-  error,
-} = useLazyFetch(() => "/api/collectivites", {
-  key: "collectivites",
+const collectivites = ref([]);
+
+onMounted(() => {
+  const store = useCollectivitesStore();
+  store.fetchCollectivites();
+  store.collectivites = collectivites;
+  console.log(collectivites);
 });
-console.log(collectivites);
-collectivites._rawValue = AllColl;
 
 const filters = useFiltersStore();
 const selectedTypes = filters.selectedTypes;
+const coll = useCollectivitesStore();
 
-watch(filters.selectedTypes, () => {
-  filters.fetchData(filters.selectedTypes);
-
-  console.log("page", selectedTypes);
+watch(filters.selectedTypes, async (newTypes) => {
+  await coll.fetchCollectivites(newTypes);
+  if (newTypes.length > 0) {
+    await coll.fetchCollectivites(newTypes);
+  } else {
+    await coll.fetchCollectivites();
+  }
 });
 </script>

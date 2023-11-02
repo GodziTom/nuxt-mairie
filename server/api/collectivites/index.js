@@ -3,17 +3,20 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
+  const { filters } = getQuery(event);
+
+  const where = {};
+
+  if (filters) {
+    where.type_service_local = {
+      in: JSON.parse(filters),
+    };
+  }
+
   const collectivites = await prisma.collectivites.findMany({
+    where,
     take: 30,
   });
-
-  // const types = await prisma.collectivites.groupBy({
-  //   by: ["type_service_local"],
-  //   _count: {
-  //     _all: true,
-  //   },
-  // });
-  const ntm = "ntm";
 
   return { collectivites };
 });

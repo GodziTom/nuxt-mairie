@@ -25,8 +25,6 @@ export const useFiltersStore = defineStore("filters", {
     },
 
     async fetchData(filters) {
-      //   console.log("filters", filters);
-      // Appel API avec filters
       const {
         data: collectivitesFiltered,
         pending,
@@ -34,8 +32,6 @@ export const useFiltersStore = defineStore("filters", {
       } = useLazyFetch(() => "/api/collectivites", {
         key: "collectivites",
       });
-      // console.log("collectivitesFiltered", collectivitesFiltered);
-      // Mettre à jour this.data
     },
   },
 });
