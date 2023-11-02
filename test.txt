@@ -1,0 +1,42 @@
+import { ref, onMounted, watch } from "vue";
+
+import Filters from "@/components/filters.vue";
+
+const filters = useFiltersStore();
+const selectedTypes = filters.selectedTypes;
+const collectivites = ref([]);
+
+console.log(selectedTypes);
+
+const fetchData = async (newTypes) => {
+  try {
+    // Si filtres sélectionnés, refetch avec filtres
+    if (newTypes.length) {
+      console.log("Fetching with filters");
+      const { data } = await useFetch("/api/collectivites", {
+        body: { filters: newTypes },
+      });
+      collectivites.value = data;
+    } else {
+      // Sinon récupérer toutes les données
+      console.log("Fetching without filters");
+      const { data } = await useFetch("/api/collectivites");
+      collectivites.value = data;
+    }
+  } catch (error) {
+    // Gérer les erreurs ici si nécessaire
+    console.error("Erreur lors de la récupération des données : ", error);
+  }
+};
+
+onMounted(async () => {
+  // Vérifiez si collectivites a déjà été initialisé
+  if (collectivites.value.length === 0) {
+    await fetchData(selectedTypes);
+  }
+});
+
+watch(selectedTypes, (newTypes) => {
+  // Relancer la requête lorsque selectedTypes change
+  fetchData(newTypes);
+});

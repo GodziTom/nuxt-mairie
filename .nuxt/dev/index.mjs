@@ -663,11 +663,13 @@ const errorHandler = (async function errorhandler(error, event) {
   return send(event, html);
 });
 
-const _lazy_qtiU3h = () => Promise.resolve().then(function () { return index$1; });
+const _lazy_qtiU3h = () => Promise.resolve().then(function () { return index$3; });
+const _lazy_xPGPwo = () => Promise.resolve().then(function () { return index$1; });
 const _lazy_Gdaviu = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
   { route: '/api/collectivites', handler: _lazy_qtiU3h, lazy: true, middleware: false, method: undefined },
+  { route: '/api/filters', handler: _lazy_xPGPwo, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_Gdaviu, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_Gdaviu, lazy: true, middleware: false, method: undefined }
 ];
@@ -853,19 +855,28 @@ const errorDev = /*#__PURE__*/Object.freeze({
   template: template$1
 });
 
-const prisma = new PrismaClient();
-const index = defineEventHandler(async (event) => {
-  const collectivites = await prisma.collectivites.findMany({
+const prisma$1 = new PrismaClient();
+const index$2 = defineEventHandler(async (event) => {
+  const collectivites = await prisma$1.collectivites.findMany({
     take: 30
   });
+  return { collectivites };
+});
+
+const index$3 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  default: index$2
+});
+
+const prisma = new PrismaClient();
+const index = defineEventHandler(async (event) => {
   const types = await prisma.collectivites.groupBy({
     by: ["type_service_local"],
     _count: {
       _all: true
     }
   });
-  const ntm = "ntm";
-  return { collectivites, types, ntm };
+  return { types };
 });
 
 const index$1 = /*#__PURE__*/Object.freeze({

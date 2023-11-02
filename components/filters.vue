@@ -125,7 +125,11 @@
           class="py-2 font-light border-b border-gray-200 dark:border-gray-600"
         >
           <ul class="space-y-2 h-60 overflow-auto">
-            <li class="flex items-center" v-for="cat in types" :key="cat.id">
+            <li
+              class="flex items-center"
+              v-for="cat in types.types"
+              :key="cat.id"
+            >
               <input
                 id="{{ cat.type_service_local }}"
                 type="checkbox"
@@ -736,25 +740,16 @@ function toggleSubFilters(filter) {
   }
 }
 
-//Props
-const props = defineProps({
-  collectivites: {
-    type: Array,
-    default: () => [],
-  },
+const {
+  data: filtersData,
+  pending,
+  error,
+} = useLazyFetch(() => "/api/filters", {
+  key: "filters",
 });
 
-const types = props.collectivites.types;
+const types = filtersData._rawValue;
 
-// function toggleType(type) {
-//   const index = selectedTypes.value.indexOf(type);
-//   if (index !== -1) {
-//     selectedTypes.value.splice(index, 1);
-//   } else {
-//     selectedTypes.value.push(type);
-//   }
-//   console.log(selectedTypes.value);
-// }
 function onCheckboxClick(type) {
   filters.toggleFilters(type);
 }
@@ -762,14 +757,4 @@ function onCheckboxClick(type) {
 onMounted(() => {
   filters.fetchData(filters);
 });
-
-// watch(selectedTypes, async (newSelectedTypes) => {
-//   // Cette fonction sera appelée à chaque fois que selectedTypes change
-
-//   console.log(newSelectedTypes);
-
-//   // Vous pouvez faire votre appel API ici
-//   // en passant newSelectedTypes dans le query params
-//   const response = await fetch("/api/collectivites?types=" + newSelectedTypes);
-// });
 </script>

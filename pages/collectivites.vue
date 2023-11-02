@@ -126,7 +126,7 @@
               Add product
             </button>
 
-            <Filters :collectivites="collectivites" />
+            <Filters />
             <div class="flex items-center space-x-3 w-full md:w-auto">
               <button
                 id="actionsDropdownButton"
@@ -1734,14 +1734,7 @@
 import { ref, onMounted } from "vue";
 
 import Filters from "@/components/filters.vue";
-// import useData from "@/composables/allColl.js";
-
-// console.log("useData", useData);
-
-// use lazt fetch
-// const collectivites = ref([]);
-// const pending = ref(true);
-// const error = ref(null);
+const AllColl = ref([]);
 
 const {
   data: collectivites,
@@ -1750,6 +1743,8 @@ const {
 } = useLazyFetch(() => "/api/collectivites", {
   key: "collectivites",
 });
+console.log(collectivites);
+collectivites._rawValue = AllColl;
 
 const filters = useFiltersStore();
 const selectedTypes = filters.selectedTypes;

@@ -6,13 +6,12 @@ import { ref } from "vue";
 export const useFiltersStore = defineStore("filters", {
   state: () => ({
     selectedTypes: ref([]),
+    collectivites: ref([]),
     data: [],
   }),
 
   actions: {
     toggleFilters(type) {
-      //   console.log("type", type);
-
       // Vérifier si type existe déjà
       const index = this.selectedTypes.indexOf(type);
 
@@ -26,7 +25,7 @@ export const useFiltersStore = defineStore("filters", {
     },
 
     async fetchData(filters) {
-      console.log("filters", filters);
+      //   console.log("filters", filters);
       // Appel API avec filters
       const {
         data: collectivitesFiltered,
@@ -35,7 +34,7 @@ export const useFiltersStore = defineStore("filters", {
       } = useLazyFetch(() => "/api/collectivites", {
         key: "collectivites",
       });
-      console.log("collectivitesFiltered", collectivitesFiltered);
+      // console.log("collectivitesFiltered", collectivitesFiltered);
       // Mettre à jour this.data
     },
   },

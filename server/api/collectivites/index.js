@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
     take: 30,
   });
 
-  const types = await prisma.collectivites.groupBy({
-    by: ["type_service_local"],
-    _count: {
-      _all: true,
-    },
-  });
+  // const types = await prisma.collectivites.groupBy({
+  //   by: ["type_service_local"],
+  //   _count: {
+  //     _all: true,
+  //   },
+  // });
   const ntm = "ntm";
 
-  return { collectivites, types, ntm };
+  return { collectivites };
 });
