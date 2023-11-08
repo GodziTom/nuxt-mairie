@@ -1747,7 +1747,6 @@ onMounted(() => {
 });
 
 const filters = useFiltersStore();
-const selectedTypes = filters.selectedTypes;
 const coll = useCollectivitesStore();
 
 watch(filters.selectedTypes, async (newTypes) => {

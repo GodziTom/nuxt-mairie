@@ -721,7 +721,6 @@ const filters = useFiltersStore();
 // console.log(filters);
 
 const filtersOpen = ref(false);
-
 const categoryOpen = ref(false);
 const priceOpen = ref(false);
 
