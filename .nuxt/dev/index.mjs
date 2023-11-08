@@ -864,9 +864,12 @@ const index$2 = defineEventHandler(async (event) => {
       in: JSON.parse(filters)
     };
   }
-  const collectivites = await prisma$1.collectivites.findMany({
+  const collectivites = await prisma$1.collectivites_test_dept.findMany({
     where,
-    take: 30
+    take: 30,
+    include: {
+      departement: true
+    }
   });
   return { collectivites };
 });

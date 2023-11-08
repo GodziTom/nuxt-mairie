@@ -163,54 +163,77 @@ model users {
   updatedAt DateTime @db.DateTime(0)
 }
 
-enum CollectivitesScalarFieldEnum {
-  id
-  nom
-  type_service_local
-  siret
-  siren
-  code_insee_commune
-  code_postal
-  nom_commune
-  pays
-  continent
-  longitude
-  latitude
-  adresse
-  adresse_courriel
-  telephone
-  telecopie
-  site_internet
-  copyright
-  ancien_code_pivot
-  reseau_social
-  texte_reference
-  partenaire
-  itm_identifiant
-  sigle
-  date_modification
-  date_creation
-  partenaire_date_modification
-  mission
-  formulaire_contact
-  version_type
-  version_etat_modification
-  version_source
-  type_organisme
-  type_repertoire
-  plage_ouverture
-  hierarchie
-  categorie
-  sve
-  telephone_accessible
-  application_mobile
-  statut_de_diffusion
-  information_complementaire
-  commentaire_plage_ouverture
-  annuaire
-  tchat
-  createdAt
-  updatedAt
-  is_selected
-  is_sended
+model collectivites_join {
+  code_postal      String  @id @db.VarChar(5)
+  code_departement String? @db.VarChar(2)
+}
+
+model collectivites_test_dept {
+  id                           Int       @id @default(autoincrement())
+  nom                          String?   @db.VarChar(255)
+  type_service_local           String?   @db.VarChar(255)
+  siret                        String?   @db.VarChar(255)
+  siren                        String?   @db.VarChar(255)
+  code_insee_commune           String?   @db.VarChar(255)
+  code_postal                  String?   @db.VarChar(255)
+  code_departement             String?   @db.VarChar(11)
+  nom_departement              String?   @db.VarChar(255)
+  nom_commune                  String?   @db.VarChar(255)
+  pays                         String?   @db.VarChar(255)
+  continent                    String?   @db.VarChar(255)
+  longitude                    Decimal?  @db.Decimal(10, 7)
+  latitude                     Decimal?  @db.Decimal(10, 7)
+  adresse                      String?   @db.VarChar(255)
+  adresse_courriel             String?   @db.VarChar(255)
+  telephone                    String?   @db.VarChar(255)
+  telecopie                    String?   @db.VarChar(255)
+  site_internet                String?   @db.Text
+  copyright                    String?   @db.VarChar(255)
+  ancien_code_pivot            String?   @db.VarChar(255)
+  reseau_social                String?   @db.VarChar(255)
+  texte_reference              String?   @db.VarChar(255)
+  partenaire                   String?   @db.VarChar(255)
+  itm_identifiant              String?   @db.VarChar(255)
+  sigle                        String?   @db.VarChar(255)
+  date_modification            DateTime? @db.DateTime(0)
+  date_creation                DateTime? @db.DateTime(0)
+  partenaire_date_modification DateTime? @db.DateTime(0)
+  mission                      String?   @db.Text
+  formulaire_contact           String?   @db.VarChar(255)
+  version_type                 String?   @db.VarChar(255)
+  version_etat_modification    String?   @db.VarChar(255)
+  version_source               String?   @db.VarChar(255)
+  type_organisme               String?   @db.VarChar(255)
+  type_repertoire              String?   @db.VarChar(255)
+  plage_ouverture              Json?
+  hierarchie                   Json?
+  categorie                    String?   @db.VarChar(255)
+  sve                          String?   @db.VarChar(255)
+  telephone_accessible         String?   @db.VarChar(255)
+  application_mobile           String?   @db.VarChar(255)
+  statut_de_diffusion          String?   @db.VarChar(255)
+  information_complementaire   String?   @db.VarChar(255)
+  commentaire_plage_ouverture  String?   @db.VarChar(255)
+  annuaire                     String?   @db.VarChar(255)
+  tchat                        String?   @db.VarChar(255)
+  createdAt                    DateTime? @db.DateTime(0)
+  updatedAt                    DateTime? @db.DateTime(0)
+  is_selected                  Boolean   @default(false)
+  is_sended                    Boolean   @default(false)
+  departement_code             String?  
+  departement                  Departement? @relation(fields: [departement_code], references: [departement_code])
+}
+}
+
+model departement {
+  departement_id            Int     @id @default(autoincrement())
+  departement_code          String? @db.VarChar(3) @unique
+  departement_nom           String? @db.VarChar(255)
+  departement_nom_uppercase String? @db.VarChar(255)
+  departement_slug          String? @db.VarChar(255)
+  departement_nom_soundex   String? @db.VarChar(20)
+
+  @@index([departement_code], map: "departement_code")
+  @@index([departement_nom_soundex], map: "departement_nom_soundex")
+  @@index([departement_slug], map: "departement_slug")
 }
