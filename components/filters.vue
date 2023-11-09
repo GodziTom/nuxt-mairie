@@ -132,7 +132,9 @@
             >
               <input
                 id="{{ cat.type_service_local }}"
+                name="type"
                 type="checkbox"
+                data-filter="type"
                 value="{{
                 cat.type_service_local
                 }}"
@@ -198,7 +200,9 @@
             >
               <input
                 id="{{ dep.departement_nom }}"
+                name="departement"
                 type="checkbox"
+                data-filter="departement"
                 value="{{
                 dep.departement_nom
                 }}"
@@ -781,8 +785,8 @@ const {
 
 const filtres = filtersData._rawValue;
 
-function onCheckboxClick(type) {
-  filters.toggleFilters(type);
+function onCheckboxClick(selFilters) {
+  filters.toggleFilters(selFilters);
 }
 
 onMounted(() => {

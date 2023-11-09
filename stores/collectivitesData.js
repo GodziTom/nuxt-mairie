@@ -14,14 +14,14 @@ export const useCollectivitesStore = defineStore("collectivites", {
   actions: {
     async fetchCollectivites(filters) {
       let url = "/api/collectivites";
-      console.log("filtres", filters);
+      console.log("filtres1", filters);
 
       if (filters && filters.length) {
         const params = new URLSearchParams();
         params.append("filters", JSON.stringify(filters));
         url += `?${params.toString()}`;
       }
-      console.log("url", url);
+      // console.log("url", url);
       const response = await fetch(url);
       const data = await response.json();
 
