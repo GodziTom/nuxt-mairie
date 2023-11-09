@@ -887,10 +887,10 @@ const index = defineEventHandler(async (event) => {
       _all: true
     }
   });
-  const departements = await prisma.departement.groupBy({
-    by: ["departement_nom"],
-    _count: {
-      _all: true
+  const departements = await prisma.departement.findMany({
+    select: {
+      departement_nom: true,
+      departement_code: true
     }
   });
   return { types, departements };

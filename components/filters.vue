@@ -127,7 +127,7 @@
           <ul class="space-y-2 h-60 overflow-auto">
             <li
               class="flex items-center"
-              v-for="cat in types.types"
+              v-for="cat in filtres.types"
               :key="cat.id"
             >
               <input
@@ -154,7 +154,7 @@
           >
         </div>
       </div>
-      <!-- Price -->
+      <!-- Departement -->
       <h2 id="price-heading">
         <button
           type="button"
@@ -188,6 +188,38 @@
         v-if="departementOpenFilter"
       >
         <div
+          class="py-2 font-light border-b border-gray-200 dark:border-gray-600"
+        >
+          <ul class="space-y-2 h-60 overflow-auto">
+            <li
+              class="flex items-center"
+              v-for="dep in filtres.departements"
+              :key="dep.id"
+            >
+              <input
+                id="{{ dep.departement_nom }}"
+                type="checkbox"
+                value="{{
+                dep.departement_nom
+                }}"
+                @click="onCheckboxClick(dep.departement_nom)"
+                :checked="selectedTypes.includes(dep.departement_nom)"
+                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+              />
+              <label
+                for="{{ dep.departement_nom }}"
+                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                >{{ dep.departement_nom }} ( {{ dep.departement_code }} )</label
+              >
+            </li>
+          </ul>
+          <a
+            href="#"
+            class="flex items-center text-sm font-medium text-primary-600 dark:text-primary-500 hover:underline"
+            >View all</a
+          >
+        </div>
+        <!-- <div
           class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600"
         >
           <select
@@ -207,7 +239,7 @@
             <option>$2500</option>
             <option>$5000</option>
           </select>
-        </div>
+        </div> -->
       </div>
       <!-- Worldwide Shipping -->
       <h2 id="worldwide-shipping-heading">
@@ -747,7 +779,7 @@ const {
   key: "filters",
 });
 
-const types = filtersData._rawValue;
+const filtres = filtersData._rawValue;
 
 function onCheckboxClick(type) {
   filters.toggleFilters(type);
