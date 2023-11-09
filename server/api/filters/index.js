@@ -3,10 +3,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
-  //   const collectivites = await prisma.collectivites.findMany({
-  //     take: 30,
-  //   });
-
   const types = await prisma.collectivites.groupBy({
     by: ["type_service_local"],
     _count: {
@@ -14,5 +10,12 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  return { types };
+  const departements = await prisma.departement.groupBy({
+    by: ["departement_nom"],
+    _count: {
+      _all: true,
+    },
+  });
+
+  return { types, departements };
 });

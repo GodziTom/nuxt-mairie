@@ -13,12 +13,12 @@ export default defineEventHandler(async (event) => {
     };
   }
 
-  const collectivites = await prisma.collectivites_test_dept.findMany({
+  const collectivites = await prisma.collectivites.findMany({
+    include: {
+      departement_id: true,
+    },
     where,
     take: 30,
-    include: {
-      departement: true,
-    },
   });
 
   return { collectivites };

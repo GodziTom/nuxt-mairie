@@ -246,11 +246,13 @@
                 <td
                   class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <div class="flex items-center">
+                  <div class="flex items-center" v-if="col.departement_id">
                     <div
                       class="h-4 w-4 rounded-full inline-block mr-2 bg-red-700"
                     ></div>
-                    {{ col.code_postal }}
+                    {{ col.departement_id.departement_nom }} ({{
+                      col.departement_id.departement_code
+                    }})
                   </div>
                 </td>
                 <td
@@ -1743,7 +1745,7 @@ onMounted(() => {
   const store = useCollectivitesStore();
   store.fetchCollectivites();
   store.collectivites = collectivites;
-  console.log(collectivites);
+  console.log("allcoll", collectivites);
 });
 
 const filters = useFiltersStore();

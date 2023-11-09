@@ -864,12 +864,12 @@ const index$2 = defineEventHandler(async (event) => {
       in: JSON.parse(filters)
     };
   }
-  const collectivites = await prisma$1.collectivites_test_dept.findMany({
-    where,
-    take: 30,
+  const collectivites = await prisma$1.collectivites.findMany({
     include: {
-      departement: true
-    }
+      departement_id: true
+    },
+    where,
+    take: 30
   });
   return { collectivites };
 });
@@ -887,7 +887,13 @@ const index = defineEventHandler(async (event) => {
       _all: true
     }
   });
-  return { types };
+  const departements = await prisma.departement.groupBy({
+    by: ["departement_nom"],
+    _count: {
+      _all: true
+    }
+  });
+  return { types, departements };
 });
 
 const index$1 = /*#__PURE__*/Object.freeze({

@@ -96,7 +96,7 @@
           data-accordion-target="#category-body"
           aria-expanded="true"
           aria-controls="category-body"
-          @click="toggleSubFilters('category')"
+          @click="toggleSubFilters('types')"
         >
           <span>Type Etablissement</span>
           <svg
@@ -119,7 +119,7 @@
         id="category-body"
         class=""
         aria-labelledby="category-heading"
-        v-if="categoryOpen"
+        v-if="typeOpenFilter"
       >
         <div
           class="py-2 font-light border-b border-gray-200 dark:border-gray-600"
@@ -162,7 +162,7 @@
           data-accordion-target="#price-body"
           aria-expanded="true"
           aria-controls="price-body"
-          @click="toggleSubFilters('price')"
+          @click="toggleSubFilters('departement')"
         >
           <span>Departement</span>
           <svg
@@ -185,7 +185,7 @@
         id="price-body"
         class=""
         aria-labelledby="price-heading"
-        v-if="priceOpen"
+        v-if="departementOpenFilter"
       >
         <div
           class="flex items-center py-2 space-x-3 font-light border-b border-gray-200 dark:border-gray-600"
@@ -721,8 +721,8 @@ const filters = useFiltersStore();
 // console.log(filters);
 
 const filtersOpen = ref(false);
-const categoryOpen = ref(false);
-const priceOpen = ref(false);
+const typeOpenFilter = ref(false);
+const departementOpenFilter = ref(false);
 
 const selectedTypes = ref([]);
 
@@ -731,11 +731,11 @@ function toggleFilters() {
 }
 
 function toggleSubFilters(filter) {
-  if (filter === "category") {
-    categoryOpen.value = !categoryOpen.value;
+  if (filter === "types") {
+    typeOpenFilter.value = !typeOpenFilter.value;
   }
-  if (filter === "price") {
-    priceOpen.value = !priceOpen.value;
+  if (filter === "departement") {
+    departementOpenFilter.value = !departementOpenFilter.value;
   }
 }
 

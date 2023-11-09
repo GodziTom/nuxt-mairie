@@ -26,7 +26,7 @@ export const useCollectivitesStore = defineStore("collectivites", {
       const data = await response.json();
 
       this.collectivites = data;
-      console.log("data", data);
+      // console.log("collfiltred", data);
     },
   },
 
