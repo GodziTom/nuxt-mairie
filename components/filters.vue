@@ -786,6 +786,7 @@ const {
 const filtres = filtersData._rawValue;
 
 function onCheckboxClick(selFilters) {
+  console.log("tom", selFilters);
   filters.toggleFilters(selFilters);
 }
 
