@@ -33,14 +33,14 @@ export const useFiltersStore = defineStore("filters", {
       }
     },
 
-    // async fetchData(filters) {
-    //   const {
-    //     data: collectivitesFiltered,
-    //     pending,
-    //     error,
-    //   } = useLazyFetch(() => "/api/collectivites", {
-    //     key: "collectivites",
-    //   });
-    // },
+    async fetchData(filters) {
+      const {
+        data: collectivitesFiltered,
+        pending,
+        error,
+      } = useLazyFetch(() => "/api/collectivites", {
+        key: "collectivites",
+      });
+    },
   },
 });

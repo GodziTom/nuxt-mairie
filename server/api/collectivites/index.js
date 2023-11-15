@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
   const { filters } = getQuery(event);
   console.log("server", filters);
+  consoel.log("event", event);
 
   const where = {};
 
@@ -13,11 +14,11 @@ export default defineEventHandler(async (event) => {
       in: JSON.parse(filters),
     };
   }
-
+  console.log("where", where);
   const collectivites = await prisma.collectivites.findMany({
-    include: {
-      departement_id: true,
-    },
+    // include: {
+    //   departement_id: true,
+    // },
     where,
     take: 30,
   });
