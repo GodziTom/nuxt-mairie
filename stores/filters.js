@@ -5,34 +5,42 @@ import { ref } from "vue";
 
 export const useFiltersStore = defineStore("filters", {
   state: () => ({
-    selectedTypes: ref([]),
-    selectedDepartement: ref([]),
+    filtersArray: {
+      types: [],
+      departements: [],
+    },
+
     collectivites: ref([]),
     data: [],
   }),
 
   actions: {
-    toggleFilters(selfilters) {
-      // Vérifier si type existe déjà
-      const index = this.selectedTypes.indexOf(selfilters);
-
-      // Ajouter ou enlever selon que ça existe ou non
-      if (index === -1) {
-        this.selectedTypes.push(selfilters);
-      } else {
-        this.selectedTypes.splice(index, 1);
+    toggleFilters(filterCategory, filterValue) {
+      if (filterCategory === "type") {
+        this.filtersArray.types.includes(filterValue)
+          ? this.filtersArray.types.splice(
+              this.filtersArray.types.indexOf(filterValue),
+              1
+            )
+          : this.filtersArray.types.push(filterValue);
+      } else if (filterCategory === "departement") {
+        this.filtersArray.departements.includes(filterValue)
+          ? this.filtersArray.departements.splice(
+              this.filtersArray.departements.indexOf(filterValue),
+              1
+            )
+          : this.filtersArray.departements.push(filterValue);
       }
-      console.log("filtres2", this.selectedTypes);
     },
 
-    async fetchData(filters) {
-      const {
-        data: collectivitesFiltered,
-        pending,
-        error,
-      } = useLazyFetch(() => "/api/collectivites", {
-        key: "collectivites",
-      });
-    },
+    // async fetchData(filters) {
+    //   const {
+    //     data: collectivitesFiltered,
+    //     pending,
+    //     error,
+    //   } = useLazyFetch(() => "/api/collectivites", {
+    //     key: "collectivites",
+    //   });
+    // },
   },
 });

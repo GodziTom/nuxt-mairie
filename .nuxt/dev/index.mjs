@@ -858,6 +858,7 @@ const errorDev = /*#__PURE__*/Object.freeze({
 const prisma$1 = new PrismaClient();
 const index$2 = defineEventHandler(async (event) => {
   const { filters } = getQuery$1(event);
+  console.log("server", filters);
   const where = {};
   if (filters) {
     where.type_service_local = {

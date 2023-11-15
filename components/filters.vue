@@ -138,7 +138,7 @@
                 value="{{
                 cat.type_service_local
                 }}"
-                @click="onCheckboxClick(cat.type_service_local)"
+                @click="onCheckboxClick('type', cat.type_service_local)"
                 :checked="selectedTypes.includes(cat.type_service_local)"
                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
@@ -206,7 +206,7 @@
                 value="{{
                 dep.departement_nom
                 }}"
-                @click="onCheckboxClick(dep.departement_nom)"
+                @click="onCheckboxClick('departement', dep.departement_nom)"
                 :checked="selectedTypes.includes(dep.departement_nom)"
                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
@@ -785,9 +785,8 @@ const {
 
 const filtres = filtersData._rawValue;
 
-function onCheckboxClick(selFilters) {
-  console.log("tom", selFilters);
-  filters.toggleFilters(selFilters);
+function onCheckboxClick(filterCategory, filterValue) {
+  filters.toggleFilters(filterCategory, filterValue);
 }
 
 onMounted(() => {

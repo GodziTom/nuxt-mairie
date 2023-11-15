@@ -4,6 +4,7 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
   const { filters } = getQuery(event);
+  console.log("server", filters);
 
   const where = {};
 

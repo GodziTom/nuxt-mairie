@@ -1745,13 +1745,13 @@ onMounted(() => {
   const store = useCollectivitesStore();
   store.fetchCollectivites();
   store.collectivites = collectivites;
-  console.log("allcoll", collectivites);
+  // console.log("allcoll", collectivites);
 });
 
 const filters = useFiltersStore();
 const coll = useCollectivitesStore();
 
-watch(filters.selectedTypes, async (newTypes) => {
+watch(filters.filtersArray, async (newTypes) => {
   await coll.fetchCollectivites(newTypes);
   if (newTypes.length > 0) {
     await coll.fetchCollectivites(newTypes);

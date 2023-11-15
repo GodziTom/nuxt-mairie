@@ -15,17 +15,23 @@ export const useCollectivitesStore = defineStore("collectivites", {
     async fetchCollectivites(filters) {
       let url = "/api/collectivites";
       console.log("filtres1", filters);
-
-      if (filters && filters.length) {
+      if (filters) {
         const params = new URLSearchParams();
-        params.append("filters", JSON.stringify(filters));
+
+        Object.entries(filters).forEach(([filterType, filterValues]) => {
+          filterValues.forEach((filterValue) => {
+            params.append(filterType, filterValue);
+          });
+        });
+
         url += `?${params.toString()}`;
       }
-      // console.log("url", url);
+      console.log("url", url);
       const response = await fetch(url);
       const data = await response.json();
 
       this.collectivites = data;
+      console.log("ici", data);
       // console.log("collfiltred", data);
     },
   },
